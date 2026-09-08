@@ -1,4 +1,6 @@
-/* Reset and base styles */
+/* ========================================
+   RESET AND BASE STYLES
+   ======================================== */
 html,
 body {
     margin: 0;
@@ -13,9 +15,11 @@ body {
     min-height: 100vh;
 }
 
-/* Navigation styles */
+/* ========================================
+   NAVIGATION - MUST COME FIRST
+   ======================================== */
 nav {
-    background: linear-gradient(135deg, #2c3e50, #34495e);
+    background: linear-gradient(135deg, #1a2632, #2c3e50);
     padding: 15px 25px;
     margin-bottom: 30px;
     border-radius: 8px;
@@ -35,28 +39,39 @@ nav li {
     display: inline;
 }
 
-nav a {
-    color: #ecf0f1;
+/* CRITICAL: Navigation links - ALWAYS white */
+nav ul li a {
+    color: #ffffff !important;
     text-decoration: none;
     font-weight: 600;
     padding: 10px 20px;
     border-radius: 5px;
     transition: all 0.3s ease;
     font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
-nav a:hover {
+nav ul li a:hover {
     background-color: #3498db;
-    color: white;
+    color: #ffffff !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
 }
 
-nav a:active {
+nav ul li a:active {
     transform: translateY(0);
 }
 
-/* Main content styles */
+nav ul li a:focus {
+    outline: 3px solid #ffd700;
+    outline-offset: 2px;
+    background-color: #2980b9;
+    color: #ffffff !important;
+}
+
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
 main {
     max-width: 900px;
     margin: 0 auto;
@@ -89,12 +104,15 @@ p {
     margin-bottom: 20px;
 }
 
-ul {
+/* ========================================
+   LISTS - IMPORTANT: Only target main content lists
+   ======================================== */
+main ul {
     padding-left: 25px;
     list-style-type: none;
 }
 
-li {
+main ul li {
     margin: 15px 0;
     color: #555;
     font-size: 1.05em;
@@ -105,12 +123,14 @@ li {
     transition: all 0.2s ease;
 }
 
-li:hover {
+main ul li:hover {
     background-color: #e8f0fe;
     transform: translateX(5px);
 }
 
-/* Image styles */
+/* ========================================
+   IMAGE STYLES
+   ======================================== */
 .main-logo {
     max-width: 100%;
     height: auto;
@@ -120,8 +140,10 @@ li:hover {
     display: block;
 }
 
-/* Organization page specific styles */
-li img {
+/* ========================================
+   ORGANIZATION PAGE SPECIFIC
+   ======================================== */
+main ul li img {
     vertical-align: middle;
     margin-right: 12px;
     max-height: 35px;
@@ -129,25 +151,29 @@ li img {
     border-radius: 4px;
 }
 
-li strong {
+main ul li strong {
     color: #2c3e50;
     margin-right: 5px;
 }
 
-/* Categories page specific styles */
-main ul li {
+/* ========================================
+   CATEGORIES PAGE SPECIFIC
+   ======================================== */
+main ul li.category-item {
     font-weight: 500;
     color: #2c3e50;
     background: linear-gradient(135deg, #f8f9fa, #e8f0fe);
     padding: 12px 20px;
 }
 
-/* Footer styles */
+/* ========================================
+   FOOTER
+   ======================================== */
 footer {
     text-align: center;
     margin-top: 40px;
     padding: 25px 20px;
-    color: #7f8c8d;
+    color: #2c3e50;
     border-top: 2px solid #ecf0f1;
     font-size: 0.95em;
     max-width: 900px;
@@ -159,7 +185,9 @@ footer p {
     margin: 0;
 }
 
-/* Responsive design */
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
 @media (max-width: 768px) {
     body {
         padding: 10px;
@@ -174,14 +202,15 @@ footer p {
         gap: 8px;
     }
 
-    nav a {
+    nav ul li a {
         display: block;
         text-align: center;
         padding: 12px 20px;
         font-size: 15px;
+        background-color: rgba(255, 255, 255, 0.10);
     }
 
-    nav a:hover {
+    nav ul li a:hover {
         transform: none;
     }
 
@@ -198,12 +227,12 @@ footer p {
         font-size: 1.4em;
     }
 
-    li {
+    main ul li {
         padding: 8px 12px;
         font-size: 0.95em;
     }
 
-    li img {
+    main ul li img {
         max-height: 25px;
         margin-right: 8px;
     }
@@ -214,7 +243,6 @@ footer p {
     }
 }
 
-/* For very small screens */
 @media (max-width: 480px) {
     h1 {
         font-size: 1.5em;
@@ -225,7 +253,7 @@ footer p {
     }
 
     p,
-    li {
+    main ul li {
         font-size: 0.9em;
     }
 
@@ -233,19 +261,25 @@ footer p {
         padding: 15px;
     }
 
-    nav a {
+    nav ul li a {
         font-size: 14px;
         padding: 10px 15px;
     }
+
+    nav {
+        padding: 10px 12px;
+    }
 }
 
-/* Accessibility: Focus styles */
-nav a:focus {
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+nav ul li a:focus {
     outline: 3px solid #ffd700;
     outline-offset: 2px;
 }
 
-/* Accessibility: High contrast for readability */
+/* High contrast for readability */
 h1,
 h2,
 strong {
@@ -253,19 +287,21 @@ strong {
 }
 
 p,
-li {
+main ul li {
     color: #2d3748;
 }
 
-/* Print styles */
+/* ========================================
+   PRINT STYLES
+   ======================================== */
 @media print {
     nav {
         background: #333;
         box-shadow: none;
     }
 
-    nav a {
-        color: white;
+    nav ul li a {
+        color: white !important;
     }
 
     main {
@@ -273,7 +309,7 @@ li {
         border: 1px solid #ddd;
     }
 
-    li:hover {
+    main ul li:hover {
         background-color: #f8f9fa;
         transform: none;
     }
