@@ -4,12 +4,14 @@
         <h1>
             <%= title %>
         </h1>
-        <h2>Service Project Categories</h2>
         <ul>
-            <li>Environmental</li>
-            <li>Educational</li>
-            <li>Community Service</li>
-            <li>Health and Wellness</li>
+            <% categories.forEach(category=> { %>
+                <li>
+                    <a href="/category/<%= category.category_id %>">
+                        <%= category.name %>
+                    </a>
+                </li>
+                <% }) %>
         </ul>
     </main>
 

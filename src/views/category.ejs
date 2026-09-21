@@ -5,20 +5,8 @@
             <%= title %>
         </h1>
 
-        <% if (organizationDetails) { %>
-            <h2>
-                <%= organizationDetails.name %>
-            </h2>
-            <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo"
-                class="main-logo">
-            <p>
-                <%= organizationDetails.description %>
-            </p>
-            <p><strong>Contact:</strong>
-                <%= organizationDetails.contact_email %>
-            </p>
-
-            <h2>Service Projects</h2>
+        <% if (category) { %>
+            <h2>Service Projects in this Category</h2>
             <% if (projects.length> 0) { %>
                 <ul>
                     <% projects.forEach(project=> { %>
@@ -30,10 +18,10 @@
                         <% }) %>
                 </ul>
                 <% } else { %>
-                    <p>No service projects found for this organization.</p>
+                    <p>No service projects found in this category.</p>
                     <% } %>
                         <% } else { %>
-                            <p>Organization not found.</p>
+                            <p>Category not found.</p>
                             <% } %>
     </main>
 
