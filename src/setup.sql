@@ -15,3 +15,5 @@ VALUES
     ('BrightFuture Builders', 'A nonprofit focused on building affordable housing for communities in need.', 'info@brightfuture.org', 'brightfuture-logo.png'),
     ('GreenHarvest Growers', 'An organization dedicated to sustainable farming and food security.', 'contact@greenharvest.org', 'greenharvest-logo.png'),
     ('UnityServe Volunteers', 'Connecting volunteers with service opportunities in their community.', 'hello@unityserve.org', 'unityserve-logo.png');
+
+SELECT * FROM organization;
