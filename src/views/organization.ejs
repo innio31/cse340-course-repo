@@ -18,6 +18,8 @@
                 <%= organizationDetails.contact_email %>
             </p>
 
+            <p><a href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a></p>
+
             <h2>Service Projects</h2>
             <% if (projects.length> 0) { %>
                 <ul>
