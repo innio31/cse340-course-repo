@@ -39,7 +39,10 @@
                     <p><strong>Categories:</strong> None assigned</p>
                     <% } %>
 
-                        <p><a href="/project/<%= project.project_id %>/assign-categories">Edit Categories</a></p>
+                        <p>
+                            <a href="/edit-project/<%= project.project_id %>">Edit Project</a> |
+                            <a href="/project/<%= project.project_id %>/assign-categories">Edit Categories</a>
+                        </p>
                         <% } else { %>
                             <p>Project not found.</p>
                             <% } %>
