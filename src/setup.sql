@@ -1,83 +1,128 @@
--- ========================================
--- Organization Table
--- ========================================
+Please do not copy and use this as your own but here is a example of what they are looking for.
+
 CREATE TABLE organization (
-    organization_id SERIAL PRIMARY KEY,
-    name VARCHAR(150) NOT NULL,
-    description TEXT NOT NULL,
-    contact_email VARCHAR(255) NOT NULL,
-    logo_filename VARCHAR(255) NOT NULL
-);
+ organization_id SERIAL PRIMARY KEY,
+ name VARCHAR(150) NOT NULL,
+ description TEXT NOT NULL,
+ contact_email VARCHAR(255) NOT NULL,
+ logo_filename VARCHAR(255) NOT NULL
+ );
+ INSERT INTO organization (name, description, contact_email, logo_filename)
+ VALUES
+ ('BrightFuture Builders', 'A nonprofit focused on improving community infrastructure through sustainable construction projects.', 'info@brightfuturebuilders.org', 'brightfuture-logo.png'),
+ ('GreenHarvest Growers', 'An urban farming collective promoting food sustainability and education in local neighborhoods.', 'contact@greenharvest.org', 'greenharvest-logo.png'),
+ ('UnityServe Volunteers', 'A volunteer coordination group supporting local charities and service initiatives.', 'hello@unityserve.org', 'unityserve-logo.png');
+ CREATE TABLE project (
+ project_id SERIAL PRIMARY KEY,
+ title VARCHAR(150) NOT NULL,
+ description TEXT,
+ location VARCHAR(150),
+ organization_id INT,
+ FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
+ );
+ INSERT INTO project
+ (title, description, location, organization_id)
+ VALUES
+ ('Community Center Renovation',
+ 'Renovation and improvement of an existing community center.',
+ 'Nairobi',
+ 1),
 
--- ========================================
--- Project Table
--- ========================================
-CREATE TABLE project (
-    project_id SERIAL PRIMARY KEY,
-    organization_id INTEGER NOT NULL REFERENCES organization(organization_id),
-    title VARCHAR(150) NOT NULL,
-    description TEXT NOT NULL,
-    location VARCHAR(255) NOT NULL,
-    date DATE NOT NULL
-);
+('Sustainable School Construction',
+ 'Construction of environmentally friendly classrooms.',
+ 'Kiambu',
+ 1),
 
--- ========================================
--- Category Table
--- ========================================
+('Rural Footbridge Project',
+ 'Construction of safe pedestrian footbridges for local communities.',
+ 'Machakos',
+ 1),
+
+('Affordable Housing Initiative',
+ 'Development of affordable and sustainable housing units.',
+ 'Nakuru',
+ 1),
+
+('Community Water Facility',
+ 'Construction of a community water facility to improve access to clean water.',
+ 'Kajiado',
+ 1),
+
+('Community Vegetable Garden',
+ 'Establishment of a community vegetable garden to improve food security.',
+ 'Nairobi',
+ 2),
+
+('Urban Farming Training',
+ 'Training residents on sustainable urban farming techniques.',
+ 'Kiambu',
+ 2),
+
+('School Garden Program',
+ 'Creation of school gardens for agricultural and environmental education.',
+ 'Nakuru',
+ 2),
+
+('Community Composting Project',
+ 'A project that converts organic household waste into useful compost.',
+ 'Machakos',
+ 2),
+
+('Food Donation Harvest',
+ 'Harvesting and distributing surplus vegetables to families in need.',
+ 'Kajiado',
+ 2),
+
+('Community Cleanup Drive',
+ 'Volunteers clean public spaces and promote responsible waste management.',
+ 'Nairobi',
+ 3),
+
+('Elderly Support Program',
+ 'Volunteers provide assistance and support to elderly community members.',
+ 'Kiambu',
+ 3),
+
+('School Supplies Donation',
+ 'Collection and distribution of school supplies to students in need.',
+ 'Machakos',
+ 3),
+
+('Community Health Awareness',
+ 'Community activities promoting health, sanitation, and hygiene.',
+ 'Nakuru',
+ 3),
+
+('Youth Mentorship Program',
+ 'Mentorship activities providing guidance on education and career development.',
+ 'Kajiado',
+ 3);
+
 CREATE TABLE category (
-    category_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
-);
+ category_id SERIAL PRIMARY KEY,
+ name VARCHAR(100) NOT NULL UNIQUE
+ );
 
--- ========================================
--- Project-Category Junction Table (many-to-many)
--- ========================================
 CREATE TABLE project_category (
-    project_id INTEGER NOT NULL REFERENCES project(project_id) ON DELETE CASCADE,
-    category_id INTEGER NOT NULL REFERENCES category(category_id) ON DELETE CASCADE,
-    PRIMARY KEY (project_id, category_id)
-);
+ project_id INT NOT NULL,
+ category_id INT NOT NULL,
+ PRIMARY KEY (project_id, category_id),
+ FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE,
+ FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE
+ );
 
--- ========================================
--- Sample Data
--- ========================================
-
--- Organizations
-INSERT INTO organization (name, description, contact_email, logo_filename)
-VALUES 
-    ('BrightFuture Builders', 'A nonprofit focused on building affordable housing for communities in need.', 'info@brightfuture.org', 'brightfuture-logo.png'),
-    ('GreenHarvest Growers', 'An organization dedicated to sustainable farming and food security.', 'contact@greenharvest.org', 'greenharvest-logo.png'),
-    ('UnityServe Volunteers', 'Connecting volunteers with service opportunities in their community.', 'hello@unityserve.org', 'unityserve-logo.png');
-
--- Categories
 INSERT INTO category (name)
-VALUES 
-    ('Environmental'),
-    ('Educational'),
-    ('Community Service'),
-    ('Health and Wellness');
+ VALUES ('Environmental'),
+ ('Educational'),
+      ('Community Service'),
+      ('Health and Wellness');
 
--- Projects
-INSERT INTO project (organization_id, title, description, location, date)
-VALUES 
-    (1, 'Park Cleanup', 'Join us to clean up local parks and make them beautiful!', 'City Park', '2026-10-15'),
-    (1, 'Food Drive', 'Help collect and distribute food to those in need.', 'Community Center', '2026-10-22'),
-    (1, 'Community Tutoring', 'Volunteer to tutor students in various subjects.', 'Public Library', '2026-11-05'),
-    (2, 'Community Garden', 'Help plant and maintain a community vegetable garden.', 'GreenHarvest Farm', '2026-10-18'),
-    (2, 'Tree Planting', 'Plant trees to improve air quality and beautify the neighborhood.', 'Riverside Park', '2026-11-12'),
-    (3, 'Senior Assistance', 'Assist elderly residents with daily tasks and companionship.', 'Sunrise Senior Center', '2026-10-20'),
-    (3, 'Tutoring Program', 'Provide after-school tutoring for at-risk youth.', 'UnityServe Center', '2026-11-01');
-
--- Project-Category Relationships
 INSERT INTO project_category (project_id, category_id)
-VALUES 
-    (1, 1), -- Park Cleanup → Environmental
-    (1, 3), -- Park Cleanup → Community Service
-    (2, 3), -- Food Drive → Community Service
-    (2, 4), -- Food Drive → Health and Wellness
-    (3, 2), -- Community Tutoring → Educational
-    (4, 1), -- Community Garden → Environmental
-    (5, 1), -- Tree Planting → Environmental
-    (6, 3), -- Senior Assistance → Community Service
-    (6, 4), -- Senior Assistance → Health and Wellness
-    (7, 2); -- Tutoring Program → Educational
+ VALUES
+ (1, 1),
+ (2, 2),
+ (3, 4);
+ INSERT INTO project_category (project_id, category_id)
+ VALUES
+ (1, 3),
+ (1, 4);    
