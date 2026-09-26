@@ -42,5 +42,26 @@ const getUpcomingProjects = async (limit = 5) => {
     return result.rows;
 };
 
-// Export the model functions
-export { getAllProjects, getProjectsByOrganizationId, getProjectDetails, getUpcomingProjects };
+const createProject = async (title, description, location, date, organizationId) => {
+    const query = `
+        INSERT INTO project (title, description, location, date, organization_id)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING project_id;
+    `;
+    const queryParams = [title, description, location, date, organizationId];
+    const result = await db.query(query, queryParams);
+
+    if (result.rows.length === 0) {
+        throw new Error('Failed to create project');
+    }
+
+    return result.rows[0].project_id;
+};
+
+export {
+    getAllProjects,
+    getProjectsByOrganizationId,
+    getProjectDetails,
+    getUpcomingProjects,
+    createProject
+};
