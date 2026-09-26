@@ -35,10 +35,14 @@
                         </li>
                         <% }) %>
                 </ul>
-                <% } %>
-                    <% } else { %>
-                        <p>Project not found.</p>
-                        <% } %>
+                <% } else { %>
+                    <p><strong>Categories:</strong> None assigned</p>
+                    <% } %>
+
+                        <p><a href="/project/<%= project.project_id %>/assign-categories">Edit Categories</a></p>
+                        <% } else { %>
+                            <p>Project not found.</p>
+                            <% } %>
     </main>
 
     <%- include('partials/footer') %>
