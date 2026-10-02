@@ -18,25 +18,27 @@
                 <%= organizationDetails.contact_email %>
             </p>
 
-            <p><a href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a></p>
+            <% if (user && user.role_name==='admin' ) { %>
+                <p><a href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a></p>
+                <% } %>
 
-            <h2>Service Projects</h2>
-            <% if (projects.length> 0) { %>
-                <ul>
-                    <% projects.forEach(project=> { %>
-                        <li>
-                            <a href="/project/<%= project.project_id %>">
-                                <%= project.title %>
-                            </a>
-                        </li>
-                        <% }) %>
-                </ul>
-                <% } else { %>
-                    <p>No service projects found for this organization.</p>
-                    <% } %>
+                    <h2>Service Projects</h2>
+                    <% if (projects.length> 0) { %>
+                        <ul>
+                            <% projects.forEach(project=> { %>
+                                <li>
+                                    <a href="/project/<%= project.project_id %>">
+                                        <%= project.title %>
+                                    </a>
+                                </li>
+                                <% }) %>
+                        </ul>
                         <% } else { %>
-                            <p>Organization not found.</p>
+                            <p>No service projects found for this organization.</p>
                             <% } %>
+                                <% } else { %>
+                                    <p>Organization not found.</p>
+                                    <% } %>
     </main>
 
     <%- include('partials/footer') %>
