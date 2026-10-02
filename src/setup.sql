@@ -1,5 +1,3 @@
-Please do not copy and use this as your own but here is a example of what they are looking for.
-
 CREATE TABLE organization (
  organization_id SERIAL PRIMARY KEY,
  name VARCHAR(150) NOT NULL,
